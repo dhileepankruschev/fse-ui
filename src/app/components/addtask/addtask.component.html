@@ -1,0 +1,74 @@
+<div *ngIf="(!task_name.valid && task_name.dirty) || (!task_stdt.valid && task_stdt.dirty) || (!task_enddt.valid && task_enddt.dirty)"
+  style="color: red; padding-left: 31px">
+  Enter Mandatory fields !!
+</div>
+<br>
+<form [formGroup]="myFrmGrp" (ngSubmit)="saveTask()">
+  <table style="width: 50%">
+    <tr>
+      <td style="width: 50%">
+        <b style="padding-left: 30px">Task
+          <span style="color: red">*</span> :
+        </b>
+      </td>
+      <td style="width: 50%">
+        <input type="text" [formControl]="task_name" name="task" />
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td style="width: 50%">
+        <b style="padding-left: 30px">Priority
+          <span style="color: red">*</span> :</b>
+      </td>
+      <td style="width: 50%">
+        <select class='select-option' [formControl]="task_priority" name="priority">
+          <option [selected]="true == true" [ngValue]="0">Please Select</option>
+          <option class='option' *ngFor='let pr of priorityList' [ngValue]="pr">{{pr}}</option>
+        </select>
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td style="width: 50%">
+        <b style="padding-left: 30px">Parent Task:</b>
+      </td>
+      <td style="width: 50%">
+        <select class='select-option' [formControl]="task_parent" name="parent">
+          <option [selected]="true == true" [ngValue]="0">Please Select</option>
+          <option class='option' *ngFor='let task of taskList' [ngValue]="task | json">{{task.task}}</option>
+        </select>
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td style="width: 50%">
+        <b style="padding-left: 30px">Start date
+          <span style="color: red">*</span> :</b>
+      </td>
+      <td>
+        <input type="date" [formControl]="task_stdt" name="startdate" />
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td style="width: 50%">
+        <b style="padding-left: 30px">End date
+          <span style="color: red">*</span> :</b>
+      </td>
+      <td>
+        <input type="date" [formControl]="task_enddt" name="enddate">
+      </td>
+    </tr>
+    <br>
+    <tr>
+      <td></td>
+      <td style="width: 50%">
+        <input type="submit" value="Add Task">
+      </td>
+      <td style="width: 50%">
+        <input type="button" value="Reset" (click)="reset()">
+      </td>
+    </tr>
+  </table>
+</form>
